@@ -1,0 +1,142 @@
+[
+  {
+    "username": "jhaynes",
+    "password": "jamesloves12",
+    "fullname": "James Haynes",
+    "full_name": "James Haynes",
+    "account_number": "3928456127",
+    "routing_number": "081000210",
+    "balance": 6800000.00,
+    "email": "h00491856@gmail.com",
+    "date_joined": "2023-07-18",
+    "account_type": "Personal Checking",
+    "status": "Active",
+    "client_tier": "Platinum",
+    "card": {
+      "number": "4532771299012384",
+      "expiry": "09/29",
+      "cvv": "843"
+    },
+    "last_login": ""
+  },
+  {
+    "username": "urbanholdings02",
+    "password": "urbanHold!23",
+    "fullname": "Urban Holdings Group",
+    "full_name": "Urban Holdings Group",
+    "account_number": "304918274",
+    "routing_number": "021000021",
+    "balance": 7250000.50,
+    "email": "contact@urbanholdings02.com",
+    "date_joined": "2023-03-02",
+    "account_type": "Business Checking",
+    "status": "Active",
+    "client_tier": "Corporate",
+    "card": {
+      "number": "3698435479130340",
+      "expiry": "11/28",
+      "cvv": "092"
+    },
+    "last_login": ""
+  },
+  {
+    "username": "zenithcapital02",
+    "password": "ZenCap#2023",
+    "fullname": "Zenith Capital Partners",
+    "full_name": "Zenith Capital Partners",
+    "account_number": "849302717",
+    "routing_number": "111000614",
+    "balance": 6124500.75,
+    "email": "ops@zenithcapital02.com",
+    "date_joined": "2023-10-05",
+    "account_type": "Business Checking",
+    "status": "Active",
+    "client_tier": "Premium",
+    "card": {
+      "number": "9230357793889870",
+      "expiry": "04/29",
+      "cvv": "315"
+    },
+    "last_login": ""
+  },
+  {
+    "username": "novaindustries02",
+    "password": "Nova!2023x",
+    "fullname": "Nova Industries Ltd",
+    "full_name": "Nova Industries Ltd",
+    "account_number": "730194827",
+    "routing_number": "053000219",
+    "balance": 5302000.00,
+    "email": "finance@novaindustries02.com",
+    "date_joined": "2023-08-21",
+    "account_type": "Business Checking",
+    "status": "Active",
+    "client_tier": "Standard",
+    "card": {
+      "number": "5588810140595901",
+      "expiry": "07/28",
+      "cvv": "472"
+    },
+    "last_login": ""
+  },
+  {
+    "username": "silverline02",
+    "password": "Silver#789",
+    "fullname": "Silverline Global Investments",
+    "full_name": "Silverline Global Investments",
+    "account_number": "894203572",
+    "routing_number": "121000358",
+    "balance": 2615000.00,
+    "email": "hello@silverline02.com",
+    "date_joined": "2023-01-30",
+    "account_type": "Investment Checking",
+    "status": "Active",
+    "client_tier": "Standard",
+    "card": {
+      "number": "7738607171955873",
+      "expiry": "03/30",
+      "cvv": "661"
+    },
+    "last_login": ""
+  },
+  {
+    "username": "apexinnovations02",
+    "password": "Apex2023$$",
+    "fullname": "Apex Innovations Corporation",
+    "full_name": "Apex Innovations Corporation",
+    "account_number": "507384921",
+    "routing_number": "091000022",
+    "balance": 4989000.25,
+    "email": "accounts@apexinnovations02.com",
+    "date_joined": "2023-05-14",
+    "account_type": "Business Checking",
+    "status": "Active",
+    "client_tier": "Premium",
+    "card": {
+      "number": "0539207005770419",
+      "expiry": "10/29",
+      "cvv": "208"
+    },
+    "last_login": ""
+  },
+  {
+    "username": "empiretrust02",
+    "password": "Empire#2023",
+    "fullname": "Empire Trust Solutions",
+    "full_name": "Empire Trust Solutions",
+    "account_number": "120948376",
+    "routing_number": "026009593",
+    "balance": 7900000.00,
+    "email": "services@empiretrust02.com",
+    "date_joined": "2023-11-09",
+    "account_type": "Business Checking",
+    "status": "Active",
+    "client_tier": "Corporate",
+    "card": {
+      "number": "0803780791477879",
+      "expiry": "12/30",
+      "cvv": "104"
+    },
+    "last_login": ""
+  }
+]

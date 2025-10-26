@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Contact Us — Urban Group Bank{% endblock %}
+{% block content %}
+
+<div class="text-center mb-5">
+  <h2 class="fw-bold">Contact Urban Group Bank</h2>
+  <p class="text-muted">
+    Our team of private banking specialists is dedicated to providing discreet, personalized assistance.  
+    Whether you wish to open an account, inquire about our bespoke services, or request a private consultation,  
+    we welcome your message with the utmost confidentiality and professionalism.
+  </p>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-lg border-0 bg-dark text-white">
+      <div class="card-body p-4">
+        <h5 class="text-center fw-light mb-4 text-uppercase" style="letter-spacing: 1px;">Get in Touch</h5>
+
+        <form method="POST" action="{{ url_for('contact') }}">
+          <div class="mb-3">
+            <label class="form-label text-muted">Full Name</label>
+            <input type="text" name="name" class="form-control bg-dark text-white border-secondary rounded-3" placeholder="Enter your name" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-muted">Email Address</label>
+            <input type="email" name="email" class="form-control bg-dark text-white border-secondary rounded-3" placeholder="name@example.com" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-muted">Message</label>
+            <textarea name="message" class="form-control bg-dark text-white border-secondary rounded-3" rows="4" placeholder="Write your message..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn w-100 mt-3" 
+            style="background: linear-gradient(135deg, #bfa46f, #d4c28a); color: #1a1a1a; font-weight: 600; border: none; border-radius: 10px; transition: all 0.3s;">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .btn:hover {
+    background: linear-gradient(135deg, #d8c99b, #bfa46f);
+    transform: translateY(-1px);
+  }
+  input:focus, textarea:focus {
+    box-shadow: 0 0 8px rgba(191, 164, 111, 0.5);
+    border-color: #bfa46f !important;
+  }
+</style>
+
+{% endblock %}
+

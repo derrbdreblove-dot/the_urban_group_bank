@@ -1,0 +1,259 @@
+/* Global */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7fb;
+  color: #222;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #072c50;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar .logo img {
+  height: 35px;
+}
+
+.navbar nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar nav a:hover {
+  color: #00b4d8;
+}
+
+.navbar .logout {
+  background-color: #e63946;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.navbar .logout:hover {
+  background-color: #c32f3d;
+}
+
+/* Flash messages */
+.flash-messages {
+  padding: 10px 40px;
+  margin-top: 10px;
+}
+
+.alert {
+  padding: 12px 20px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.alert.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert.danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.alert.warning {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+/* Dashboard layout */
+.dashboard-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-header img {
+  height: 60px;
+  margin-bottom: 15px;
+}
+
+.dashboard-header h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.dashboard-header p {
+  color: #666;
+  font-size: 15px;
+}
+
+/* Account Summary */
+.account-summary {
+  background: linear-gradient(to right, #0077b6, #0096c7);
+  color: white;
+  padding: 25px 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.account-summary h2 {
+  font-size: 20px;
+}
+
+.account-summary .balance {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.account-summary .account-number {
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 500;
+  margin: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #0077b6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0096c7;
+}
+
+.btn-secondary {
+  background-color: #48cae4;
+  color: #003049;
+}
+
+.btn-secondary:hover {
+  background-color: #00b4d8;
+}
+
+.btn-outline {
+  border: 2px solid #0077b6;
+  color: #0077b6;
+  background: white;
+}
+
+.btn-outline:hover {
+  background-color: #0077b6;
+  color: white;
+}
+
+/* Transactions Table */
+.transactions-section {
+  margin-top: 30px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.transactions-section h2 {
+  margin-bottom: 15px;
+  color: #072c50;
+}
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.transactions-table th {
+  background-color: #072c50;
+  color: white;
+  padding: 12px;
+  text-align: left;
+}
+
+.transactions-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.transactions-table tr:nth-child(even) {
+  background-color: #f9fbfd;
+}
+
+/* Footer */
+footer {
+  background-color: #072c50;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 40px;
+  font-size: 14px;
+}
+.page-logo {
+  height: 60px;
+  width: auto;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+/* --- Send Money Page --- */
+.page-logo {
+  height: 55px;
+  width: auto;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
+.modern-input {
+  border-radius: 10px;
+  border: 1px solid #d0d7de;
+  transition: all 0.2s ease-in-out;
+}
+
+.modern-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+}
+
+.send-btn {
+  background-color: #007bff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.send-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.send-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}

@@ -1,0 +1,297 @@
+{% extends 'base.html' %}
+{% block title %}Transactions - The Urban Group Bank{% endblock %}
+
+{% block content %}
+<div class="transactions-page">
+    <section class="header-section">
+        <img src="{{ url_for('static', filename='image/logo.png') }}" alt="The Urban Group Bank" class="page-logo">
+        <h1>Transaction History</h1>
+        <p class="subtitle">Your complete record of account activity</p>
+        <a href="{{ url_for('dashboard') }}" class="btn-back">← Back to Dashboard</a>
+    </section>
+
+    {% set flagged = transactions | selectattr("status", "equalto", "flagged") | list %}
+    {% set normal = transactions | rejectattr("status", "equalto", "flagged") | list %}
+
+    <!-- 🚨 FLAGGED WARNING BANNER -->
+    {% if flagged %}
+    <div class="alert-banner">
+        <strong>⚠ Important:</strong> Some transactions are currently under review for potential fraud.  
+        Please <a href="{{ url_for('contact') }}">contact support</a> for verification.
+    </div>
+    {% endif %}
+
+    <section class="transactions-section">
+
+        <!-- ✅ REAL USER TRANSACTIONS -->
+        <div class="transactions-card">
+            <h2>Your Transactions</h2>
+
+            {% if normal %}
+                <table class="transactions-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Amount</th>
+                            <th>Purpose</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in normal %}
+                            <tr class="{% if t.to == user.username %}credit-row{% else %}debit-row{% endif %}">
+                                <td>{{ t.timestamp }}</td>
+                                <td>{{ t.from }}</td>
+                                <td>{{ t.to }}</td>
+                                <td class="amount">${{ "{:,.2f}".format(t.amount) }}</td>
+                                <td>{{ t.purpose }}</td>
+                                <td><span class="badge credit">Completed</span></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="no-transactions">No completed transactions found.</p>
+            {% endif %}
+        </div>
+
+        <!-- ⚠ FLAGGED TRANSACTIONS -->
+        {% if flagged %}
+        <div class="transactions-card flagged-section">
+            <h2>⚠ Pending / Flagged Transactions</h2>
+            <p class="flagged-note">These transactions are being reviewed for security reasons. Our support team will reach out if verification is required.</p>
+
+            <table class="transactions-table flagged">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Amount</th>
+                        <th>Purpose</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in flagged %}
+                        <tr class="flagged-row">
+                            <td>{{ t.timestamp }}</td>
+                            <td>{{ t.from }}</td>
+                            <td>{{ t.to }}</td>
+                            <td class="amount">${{ "{:,.2f}".format(t.amount) }}</td>
+                            <td>{{ t.purpose }}</td>
+                            <td><span class="badge flagged">Flagged for Review</span></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+        <!-- 💼 DEMO TRANSACTIONS -->
+        <div class="transactions-card">
+            <h2>Demo Transactions</h2>
+
+            {% set demo_transactions = [
+                {"date": "2025-09-28", "from": "UrbanGroupHQ", "to": user.username, "amount": 350000, "purpose": "Project Bonus", "type": "credit"},
+                {"date": "2025-09-10", "from": user.username, "to": "Gulf Imports", "amount": 210000, "purpose": "Business Supplies", "type": "debit"},
+                {"date": "2025-09-01", "from": "Sunrise Holdings", "to": user.username, "amount": 180000, "purpose": "Partnership Income", "type": "credit"},
+                {"date": "2025-08-25", "from": user.username, "to": "LogiPay Freight", "amount": 165000, "purpose": "Shipping Fees", "type": "debit"},
+                {"date": "2025-08-14", "from": "NexaTech Ltd", "to": user.username, "amount": 220000, "purpose": "Contract Payment", "type": "credit"},
+                {"date": "2025-08-02", "from": user.username, "to": "Skyline Realty", "amount": 295000, "purpose": "Office Lease", "type": "debit"},
+                {"date": "2025-07-21", "from": "BlueWave Energy", "to": user.username, "amount": 180000, "purpose": "Dividend", "type": "credit"},
+                {"date": "2025-07-15", "from": user.username, "to": "Oceanic Bank", "amount": 90000, "purpose": "Loan Repayment", "type": "debit"},
+                {"date": "2025-07-05", "from": "UrbanGroupHQ", "to": user.username, "amount": 250000, "purpose": "Performance Payout", "type": "credit"},
+                {"date": "2025-07-01", "from": user.username, "to": "TechPro Systems", "amount": 95000, "purpose": "Equipment Purchase", "type": "debit"}
+            ] %}
+
+            <table class="transactions-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Amount</th>
+                        <th>Purpose</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in demo_transactions %}
+                        <tr class="{{ 'credit-row' if t.type == 'credit' else 'debit-row' }}">
+                            <td>{{ t.date }}</td>
+                            <td>{{ t.from }}</td>
+                            <td>{{ t.to }}</td>
+                            <td class="amount">${{ "{:,.2f}".format(t.amount) }}</td>
+                            <td>{{ t.purpose }}</td>
+                            <td>
+                                {% if t.type == 'credit' %}
+                                    <span class="badge credit">Credit</span>
+                                {% else %}
+                                    <span class="badge debit">Debit</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+body {
+    background: #f4f7fb;
+    color: #1c2b36;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.transactions-page {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.header-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page-logo {
+    width: 120px;
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    color: #667;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.btn-back {
+    display: inline-block;
+    background: #0074cc;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+.btn-back:hover {
+    background: #005fa3;
+}
+
+.alert-banner {
+    background: #ffebee;
+    border: 1px solid #e57373;
+    color: #b71c1c;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-weight: 500;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.alert-banner a {
+    color: #b71c1c;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.alert-banner a:hover {
+    color: #7f0000;
+}
+
+.transactions-card {
+    background: white;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.transactions-card h2 {
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #0a2a43;
+}
+
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.transactions-table th, .transactions-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #e6e6e6;
+    text-align: left;
+}
+
+.transactions-table th {
+    background: #f7faff;
+    color: #0a2a43;
+    font-weight: 600;
+}
+
+.amount {
+    font-weight: 600;
+    color: #0074cc;
+}
+
+.credit-row .amount {
+    color: #00a65a;
+}
+.debit-row .amount {
+    color: #d32f2f;
+}
+
+.flagged-section {
+    border: 1px solid #f5c6cb;
+    background: #fff5f5;
+}
+
+.flagged-section h2 {
+    color: #b71c1c;
+}
+.flagged-note {
+    color: #a33;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.flagged-row .amount {
+    color: #b71c1c;
+    font-weight: 700;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+.badge.credit {
+    background: #e0f7e9;
+    color: #008e53;
+}
+.badge.debit {
+    background: #fde8e8;
+    color: #d32f2f;
+}
+.badge.flagged {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.no-transactions {
+    text-align: center;
+    color: #888;
+    padding: 20px 0;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - The Urban Group Bank{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+    <section class="welcome-section">
+        <div class="welcome-card">
+            <img src="{{ url_for('static', filename='image/logo.png') }}" alt="The Urban Group Bank" class="page-logo">
+            <h1>Welcome back, {{ user.full_name }}</h1>
+            <p class="subtitle">Your secure banking dashboard</p>
+        </div>
+    </section>
+
+    <section class="account-section">
+        <div class="account-card">
+            <h2>Account Balance</h2>
+            <h1 class="balance">{{ balance_formatted }}</h1>
+            <p class="account-number">Account #: {{ user.account_number }}</p>
+        </div>
+
+        <div class="actions-card">
+            <a href="{{ url_for('send') }}" class="action-btn primary">
+                <span class="btn-icon">💸</span> <span class="btn-text">Send Money</span>
+            </a>
+            <a href="{{ url_for('transactions') }}" class="action-btn secondary">
+                <span class="btn-icon">📜</span> <span class="btn-text">View Transactions</span>
+            </a>
+            <a href="{{ url_for('account_details') }}" class="action-btn outline">
+                <span class="btn-icon">👤</span> <span class="btn-text">Account Details</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="transactions-section">
+        <div class="transactions-card">
+            <h2>Recent Transactions</h2>
+            {% if transactions %}
+                <table class="transactions-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Amount</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in transactions %}
+                            <tr>
+                                <td>{{ t.timestamp }}</td>
+                                <td>{{ t.from }}</td>
+                                <td>{{ t.to }}</td>
+                                <td class="amount">${{ "{:,.2f}".format(t.amount) }}</td>
+                                <td>{{ t.purpose }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="no-transactions">No recent transactions yet.</p>
+            {% endif %}
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+body {
+    background: #f4f7fb;
+    color: #1c2b36;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-wrapper {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.welcome-card {
+    text-align: center;
+    padding: 30px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.bank-logo {
+    width: 130px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #667;
+    font-size: 15px;
+}
+
+.account-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.account-card {
+    background: linear-gradient(135deg, #0074cc, #0099ff);
+    color: white;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.account-card h2 {
+    font-weight: 500;
+}
+
+.balance {
+    font-size: 38px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.account-number {
+    font-size: 15px;
+    color: rgba(255,255,255,0.9);
+}
+
+/* Action Buttons Section */
+.actions-card {
+    background: white;
+    border-radius: 14px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px;
+    padding: 14px 26px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-icon {
+    font-size: 18px;
+}
+
+.primary {
+    background: #0074cc;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 116, 204, 0.3);
+}
+.primary:hover {
+    background: #005fa3;
+    transform: translateY(-2px);
+}
+
+.secondary {
+    background: #4a90e2;
+    color: white;
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+}
+.secondary:hover {
+    background: #357abd;
+    transform: translateY(-2px);
+}
+
+.outline {
+    border: 2px solid #0074cc;
+    color: #0074cc;
+    background: white;
+}
+.outline:hover {
+    background: #0074cc;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Transactions Table */
+.transactions-card {
+    margin-top: 40px;
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.transactions-card h2 {
+    margin-bottom: 15px;
+}
+
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transactions-table th, .transactions-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.transactions-table th {
+    background: #f7faff;
+    color: #0a2a43;
+    font-weight: 600;
+}
+
+.transactions-table .amount {
+    font-weight: bold;
+    color: #0074cc;
+}
+
+.no-transactions {
+    text-align: center;
+    color: #999;
+    padding: 20px 0;
+}
+</style>
+{% endblock %}

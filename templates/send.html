@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Send Money{% endblock %}
+{% block content %}
+<div class="container mt-5 mb-5">
+  <div class="text-center mb-4">
+    <img src="{{ url_for('static', filename='image/logo.png') }}" alt="The Urban Group Bank" class="page-logo">
+    <h2 class="fw-bold text-dark mt-3">Send Money</h2>
+    <p class="text-muted">Fast, secure, and reliable transfers to trusted recipients</p>
+  </div>
+
+  <div class="card shadow-lg border-0 rounded-4 p-4" style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" id="sendForm">
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-dark">Recipient Name</label>
+        <input type="text" name="recipient" class="form-control modern-input" placeholder="e.g., Empire Trust Partners" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-dark">Account Number</label>
+        <input type="text" name="account_number" class="form-control modern-input" placeholder="Enter account number" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-dark">Routing Number</label>
+        <input type="text" name="routing_number" class="form-control modern-input" placeholder="Enter routing number" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-dark">Amount ($)</label>
+        <input type="number" name="amount" class="form-control modern-input" min="1" placeholder="Enter amount" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-semibold text-dark">Purpose</label>
+        <textarea name="purpose" class="form-control modern-input" rows="3" placeholder="Purpose of payment" required></textarea>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" id="sendBtn" class="btn btn-primary btn-lg fw-bold send-btn">
+          <span id="btnText">Send Money</span>
+          <span id="spinner" class="spinner-border spinner-border-sm ms-2" style="display: none;"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const sendForm = document.getElementById("sendForm");
+  const sendBtn = document.getElementById("sendBtn");
+  const spinner = document.getElementById("spinner");
+  const btnText = document.getElementById("btnText");
+
+  sendForm.addEventListener("submit", () => {
+    sendBtn.disabled = true;
+    spinner.style.display = "inline-block";
+    btnText.textContent = "Processing...";
+  });
+</script>
+{% endblock %}
