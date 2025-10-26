@@ -257,3 +257,79 @@ footer {
   background-color: #6c757d;
   cursor: not-allowed;
 }
+
+/* --- Responsive Design --- */
+
+/* For tablets and small laptops */
+@media (max-width: 992px) {
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .navbar nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navbar nav a {
+    margin: 6px;
+    font-size: 15px;
+  }
+
+  main {
+    padding: 15px;
+  }
+
+  .dashboard-card,
+  .account-card,
+  .transaction-table {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 600px) {
+  body {
+    font-size: 15px;
+  }
+
+  header.navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 5px;
+  }
+
+  nav a {
+    display: block;
+    margin: 8px 0;
+  }
+
+  .transaction-table table,
+  .transaction-table th,
+  .transaction-table td {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  .send-form input,
+  .send-form button {
+    width: 100%;
+  }
+
+  footer p {
+    font-size: 12px;
+  }
+}

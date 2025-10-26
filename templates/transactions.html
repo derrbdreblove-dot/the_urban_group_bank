@@ -25,7 +25,7 @@
 
         <!-- ✅ REAL USER TRANSACTIONS -->
         <div class="transactions-card">
-            <h2>Your Transactions</h2>
+            <h2>Recent Transactions</h2>
 
             {% if normal %}
                 <table class="transactions-table">
@@ -92,7 +92,7 @@
 
         <!-- 💼 DEMO TRANSACTIONS -->
         <div class="transactions-card">
-            <h2>Demo Transactions</h2>
+            <h2>Past Transactions</h2>
 
             {% set demo_transactions = [
                 {"date": "2025-09-28", "from": "UrbanGroupHQ", "to": user.username, "amount": 350000, "purpose": "Project Bonus", "type": "credit"},
