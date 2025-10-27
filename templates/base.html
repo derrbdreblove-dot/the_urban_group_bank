@@ -48,7 +48,7 @@
       display: flex;
       align-items: center;
       gap: 15px;
-      transition: max-height 0.3s ease;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
     }
 
     nav a {
@@ -107,16 +107,18 @@
         align-items: flex-start;
         max-height: 0;
         overflow: hidden;
+        opacity: 0;
       }
 
       nav.show {
-        max-height: 300px;
+        max-height: 500px; /* Increased to fit all links */
+        opacity: 1;
         padding: 10px 0;
       }
 
       nav a {
         width: 100%;
-        padding: 10px 20px;
+        padding: 12px 20px;
         border-top: 1px solid rgba(255,255,255,0.1);
       }
 
@@ -212,13 +214,21 @@
   </footer>
 
   <script>
-    // JS for toggle menu
     const toggleBtn = document.getElementById('menu-toggle');
     const navMenu = document.getElementById('nav-menu');
 
     toggleBtn.addEventListener('click', () => {
       navMenu.classList.toggle('show');
       toggleBtn.classList.toggle('open');
+    });
+
+    // Close menu after clicking any link
+    const navLinks = document.querySelectorAll('#nav-menu a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('show');
+        toggleBtn.classList.remove('open');
+      });
     });
   </script>
 
