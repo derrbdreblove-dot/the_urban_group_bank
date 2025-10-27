@@ -226,5 +226,51 @@ body {
     color: #999;
     padding: 20px 0;
 }
+
+/* ✅ Responsive Design for Mobile */
+@media (max-width: 768px) {
+    .dashboard-wrapper {
+        margin: 20px auto;
+        padding: 10px;
+    }
+
+    .account-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .actions-card {
+        padding: 20px;
+    }
+
+    .action-btn {
+        width: 100%;
+        margin: 8px 0;
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    .transactions-table th, .transactions-table td {
+        font-size: 13px;
+        padding: 8px 6px;
+        word-wrap: break-word;
+    }
+
+    .transactions-card {
+        padding: 20px;
+    }
+
+    .balance {
+        font-size: 30px;
+    }
+
+    .welcome-card {
+        padding: 20px;
+    }
+
+    .page-logo {
+        width: 100px;
+    }
+}
 </style>
 {% endblock %}

@@ -333,3 +333,22 @@ footer {
     font-size: 12px;
   }
 }
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  table {
+    font-size: 12px;
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+
+  .card, .container, .content {
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+  }
+}
