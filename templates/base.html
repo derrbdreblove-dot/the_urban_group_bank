@@ -5,23 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}The Urban Group Bank{% endblock %}</title>
 
-  <!-- Global stylesheet -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 
-  <!-- Page-specific styles (e.g. Dashboard inline CSS) -->
   {% block styles %}{% endblock %}
 
-   <style>
+  <style>
     /* Navbar styling */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       background: #0a2a43;
-      padding: 10px 30px;
+      padding: 10px 20px;
       color: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      flex-wrap: wrap; /* ✅ allow stacking on small screens */
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
 
     .nav-logo-link {
@@ -30,11 +29,6 @@
       text-decoration: none;
       color: white;
       transition: 0.2s ease;
-    }
-
-    .nav-logo-link:hover {
-      opacity: 0.85;
-      transform: scale(1.03);
     }
 
     .nav-logo {
@@ -48,16 +42,13 @@
       font-size: 18px;
       font-weight: 600;
       letter-spacing: 0.5px;
-      white-space: nowrap;
     }
 
     nav {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
       align-items: center;
-      gap: 12px;
-      margin-top: 8px;
+      gap: 15px;
+      transition: max-height 0.3s ease;
     }
 
     nav a {
@@ -65,7 +56,7 @@
       text-decoration: none;
       font-weight: 500;
       transition: color 0.2s ease;
-      font-size: 15px;
+      padding: 6px 10px;
     }
 
     nav a:hover {
@@ -83,10 +74,73 @@
       background: #005fa3;
     }
 
+    /* Hamburger button */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 25px;
+      height: 20px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      nav {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #0a2a43;
+        flex-direction: column;
+        align-items: flex-start;
+        max-height: 0;
+        overflow: hidden;
+      }
+
+      nav.show {
+        max-height: 300px;
+        padding: 10px 0;
+      }
+
+      nav a {
+        width: 100%;
+        padding: 10px 20px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      /* Animate hamburger to “X” */
+      .menu-toggle.open span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      .menu-toggle.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .menu-toggle.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+    }
+
+    /* Flash messages */
     .flash-messages {
       margin: 15px auto;
       max-width: 800px;
-      padding: 0 10px;
+      padding: 0 20px;
     }
 
     .alert {
@@ -102,42 +156,11 @@
 
     footer {
       text-align: center;
-      padding: 15px;
-      margin-top: 40px;
+      padding: 20px;
       background: #0a2a43;
       color: white;
+      margin-top: 50px;
       font-size: 14px;
-    }
-
-    /* ✅ Responsive fixes for phones */
-    @media (max-width: 768px) {
-      .navbar {
-        padding: 10px 15px;
-      }
-
-      .nav-logo {
-        height: 35px;
-      }
-
-      .bank-name {
-        font-size: 16px;
-      }
-
-      nav {
-        width: 100%;
-        justify-content: center;
-        margin-top: 10px;
-        flex-direction: column; /* stack links */
-      }
-
-      nav a {
-        display: block;
-        padding: 6px 0;
-      }
-
-      .flash-messages {
-        padding: 0 8px;
-      }
     }
   </style>
 </head>
@@ -153,7 +176,14 @@
       </a>
     </div>
 
-    <nav>
+    <!-- Hamburger Button -->
+    <button class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav id="nav-menu">
       <a href="{{ url_for('dashboard') }}">Dashboard</a>
       <a href="{{ url_for('account_details') }}">Account</a>
       <a href="{{ url_for('transactions') }}">Transactions</a>
@@ -163,7 +193,6 @@
     </nav>
   </header>
 
-  <!-- Flash messages -->
   <main>
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -178,10 +207,20 @@
     {% block content %}{% endblock %}
   </main>
 
-  <!-- Footer -->
   <footer>
     <p>© 2025 The Urban Group Bank — All Rights Reserved.</p>
   </footer>
+
+  <script>
+    // JS for toggle menu
+    const toggleBtn = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    toggleBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('show');
+      toggleBtn.classList.toggle('open');
+    });
+  </script>
 
 </body>
 </html>
