@@ -8,6 +8,10 @@ body {
 
 /* Navbar */
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   background-color: #072c50;
   color: #fff;
   display: flex;
@@ -15,6 +19,7 @@ body {
   align-items: center;
   padding: 12px 40px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
 
 .navbar .logo {
@@ -27,12 +32,20 @@ body {
   height: 35px;
 }
 
+.navbar nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  flex-grow: 1;
+}
+
 .navbar nav a {
   color: #fff;
   text-decoration: none;
-  margin: 0 12px;
   font-weight: 500;
   transition: color 0.3s ease;
+  padding: 6px 10px;
 }
 
 .navbar nav a:hover {
@@ -44,11 +57,43 @@ body {
   padding: 8px 16px;
   border-radius: 6px;
   font-weight: bold;
+  margin-left: 20px;
+  white-space: nowrap;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .navbar .logout:hover {
   background-color: #c32f3d;
+  transform: translateY(-2px);
 }
+
+/* Ensure page content doesn't hide under fixed navbar */
+body {
+  padding-top: 75px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 12px 20px;
+  }
+
+  .navbar nav {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .navbar .logout {
+    margin: 10px 0 0 0;
+    width: 80%;
+    text-align: center;
+  }
+}
+
 
 /* Flash messages */
 .flash-messages {
@@ -350,5 +395,39 @@ footer {
     margin: 0;
     padding: 10px;
     width: 100%;
+  }
+}
+/* === MOBILE DASHBOARD FIX === */
+.dashboard-card {
+  width: 100%;
+  max-width: 380px; /* keeps it nice and centered */
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  box-sizing: border-box;
+}
+
+.dashboard-card .btn {
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  .dashboard-card {
+    padding: 20px 10px;
+    border-radius: 10px;
+    max-width: 340px;
+  }
+
+  .dashboard-card .btn {
+    font-size: 14px;
+    padding: 10px 0;
   }
 }

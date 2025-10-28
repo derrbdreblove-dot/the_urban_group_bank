@@ -20,13 +20,13 @@
 
         <div class="actions-card">
             <a href="{{ url_for('send') }}" class="action-btn primary">
-                <span class="btn-icon">💸</span> <span class="btn-text">Send Money</span>
+                💸 Send Money
             </a>
             <a href="{{ url_for('transactions') }}" class="action-btn secondary">
-                <span class="btn-icon">📜</span> <span class="btn-text">View Transactions</span>
+                📜 View Transactions
             </a>
             <a href="{{ url_for('account_details') }}" class="action-btn outline">
-                <span class="btn-icon">👤</span> <span class="btn-text">Account Details</span>
+                👤 Account Details
             </a>
         </div>
     </section>
@@ -35,6 +35,7 @@
         <div class="transactions-card">
             <h2>Recent Transactions</h2>
             {% if transactions %}
+            <div class="table-wrapper">
                 <table class="transactions-table">
                     <thead>
                         <tr>
@@ -47,18 +48,19 @@
                     </thead>
                     <tbody>
                         {% for t in transactions %}
-                            <tr>
-                                <td>{{ t.timestamp }}</td>
-                                <td>{{ t.from }}</td>
-                                <td>{{ t.to }}</td>
-                                <td class="amount">${{ "{:,.2f}".format(t.amount) }}</td>
-                                <td>{{ t.purpose }}</td>
-                            </tr>
+                        <tr>
+                            <td>{{ t.timestamp }}</td>
+                            <td>{{ t.from }}</td>
+                            <td>{{ t.to }}</td>
+                            <td class="amount">${{ "{:,.2f}".format(t.amount) }}</td>
+                            <td>{{ t.purpose }}</td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>
+            </div>
             {% else %}
-                <p class="no-transactions">No recent transactions yet.</p>
+            <p class="no-transactions">No recent transactions yet.</p>
             {% endif %}
         </div>
     </section>
@@ -67,203 +69,204 @@
 
 {% block styles %}
 <style>
+/* Body */
 body {
-    background: #f4f7fb;
-    color: #1c2b36;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7fb;
+  color: #1c2b36;
+  overflow-x: hidden;
+}
+
+/* Fix navbar + footer */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #072c50;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #072c50;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  z-index: 1000;
 }
 
 /* Wrapper */
 .dashboard-wrapper {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
+  max-width: 1100px;
+  margin: 120px auto 80px auto; /* Add space for navbar & footer */
+  padding: 0 20px;
 }
 
-/* Welcome Section */
+/* Welcome */
 .welcome-card {
-    text-align: center;
-    padding: 30px;
-    background: white;
-    border-radius: 14px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
 .page-logo {
-    width: 120px;
-    margin-bottom: 10px;
-}
-
-.subtitle {
-    color: #667;
-    font-size: 15px;
+  width: 100px;
+  margin-bottom: 10px;
 }
 
 /* Account Section */
 .account-section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
 }
 
 .account-card, .actions-card {
-    flex: 1 1 300px;
-    max-width: 480px;
-    box-sizing: border-box;
+  flex: 1 1 350px;
+  max-width: 500px;
+  border-radius: 14px;
+  box-sizing: border-box;
 }
 
 /* Account Card */
 .account-card {
-    background: linear-gradient(135deg, #0074cc, #0099ff);
-    color: white;
-    border-radius: 14px;
-    padding: 30px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  background: linear-gradient(135deg, #0077b6, #0096c7);
+  color: white;
+  padding: 30px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 
-.account-card h2 {
-    font-weight: 500;
-}
-
-.balance {
-    font-size: 38px;
-    margin: 10px 0;
-    font-weight: bold;
-}
-
-.account-number {
-    font-size: 15px;
-    color: rgba(255,255,255,0.9);
-}
-
-/* Actions Card */
+/* Actions Card (white background removed) */
 .actions-card {
-    background: white;
-    border-radius: 14px;
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  background: transparent;
+  padding: 0;
+  text-align: center;
+  box-shadow: none;
 }
 
+/* Buttons */
 .action-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin: 10px auto;
-    padding: 14px 26px;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 15px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    width: 80%;
-    max-width: 280px;
-}
-
-.btn-icon {
-    font-size: 18px;
+  display: block;
+  text-decoration: none;
+  margin: 10px auto;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 300px;
 }
 
 .primary {
-    background: #0074cc;
-    color: white;
-    box-shadow: 0 4px 10px rgba(0, 116, 204, 0.3);
+  background: #0077b6;
+  color: white;
 }
 .primary:hover {
-    background: #005fa3;
-    transform: translateY(-2px);
+  background: #005f94;
 }
 
 .secondary {
-    background: #4a90e2;
-    color: white;
-    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+  background: #4a90e2;
+  color: white;
 }
 .secondary:hover {
-    background: #357abd;
-    transform: translateY(-2px);
+  background: #357abd;
 }
 
 .outline {
-    border: 2px solid #0074cc;
-    color: #0074cc;
-    background: white;
+  border: 2px solid #0077b6;
+  color: #0077b6;
+  background: white;
 }
 .outline:hover {
-    background: #0074cc;
-    color: white;
-    transform: translateY(-2px);
+  background: #0077b6;
+  color: white;
 }
 
-/* Transactions Section */
+/* Transactions */
 .transactions-card {
-    margin-top: 40px;
-    background: white;
-    border-radius: 14px;
-    padding: 25px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    text-align: left;
+  background: white;
+  border-radius: 14px;
+  padding: 25px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
 }
 
-.transactions-card h2 {
-    margin-bottom: 15px;
-    text-align: center;
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .transactions-table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
 }
 
 .transactions-table th, .transactions-table td {
-    padding: 12px 10px;
-    border-bottom: 1px solid #eee;
-    text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  white-space: nowrap;
 }
 
 .transactions-table th {
-    background: #f7faff;
-    color: #0a2a43;
-    font-weight: 600;
+  background: #f7faff;
+  color: #0a2a43;
 }
 
 .transactions-table .amount {
-    font-weight: bold;
-    color: #0074cc;
+  color: #0074cc;
+  font-weight: bold;
 }
 
+/* No transactions */
 .no-transactions {
-    text-align: center;
-    color: #999;
-    padding: 20px 0;
+  text-align: center;
+  color: #999;
 }
 
-/* Responsive Fixes */
+/* Responsive */
 @media (max-width: 768px) {
-    .dashboard-wrapper {
-        padding: 0 10px;
-    }
+  .dashboard-wrapper {
+    padding: 0 10px;
+    margin: 100px auto 70px auto;
+  }
 
-    .account-section {
-        flex-direction: column;
-        align-items: center;
-    }
+  .account-section {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .transactions-card {
-        padding: 15px;
-    }
+  .transactions-card {
+    padding: 15px;
+  }
 
-    .action-btn {
-        width: 100%;
-    }
+  .table-wrapper {
+    border-radius: 10px;
+    overflow-x: auto;
+  }
+
+  .transactions-table {
+    display: block;
+  }
 }
 </style>
 {% endblock %}
