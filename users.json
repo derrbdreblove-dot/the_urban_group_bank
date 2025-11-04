@@ -138,5 +138,45 @@
       "cvv": "104"
     },
     "last_login": ""
+  },
+  {
+    "username": "shanebertelli1",
+    "password": "shaneloves12",
+    "fullname": "Shane Bertelli",
+    "full_name": "Shane Bertelli",
+    "account_number": "506384921",
+    "routing_number": "091000122",
+    "balance": 4989000.25,
+    "email": "shaneprada05@gmail.com",
+    "date_joined": "2023-05-14",
+    "account_type": "Personal Checking",
+    "status": "Active",
+    "client_tier": "Premium",
+    "card": {
+      "number": "0439207006770419",
+      "expiry": "10/29",
+      "cvv": "218"
+    },
+    "last_login": ""
+  },
+  {
+    "username": "shane.bertelli",
+    "password": "scrypt:32768:8:1$oG1wIX4Y48ofTMqY$3ae6b1e976151c5280a820197e19d96acd068ca5ecb9ea7dfe33a8433eb93b68b8000b9b20bcaa4c0dc6ccd03409a8248300daa35087049360f164e3bf110b1e",
+    "fullname": "Shane Bertelli",
+    "full_name": "Shane Bertelli",
+    "account_number": "507394921",
+    "routing_number": "081000022",
+    "balance": 4989000.25,
+    "email": "shanebertelli@gmail.com",
+    "date_joined": "2023-05-14",
+    "account_type": "Personal Checking",
+    "status": "Active",
+    "client_tier": "Premium",
+    "card": {
+      "number": "0539207005660419",
+      "expiry": "10/29",
+      "cvv": "206"
+    },
+    "last_login": ""
   }
 ]
