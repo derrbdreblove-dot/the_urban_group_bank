@@ -100,6 +100,26 @@
     "last_login": ""
   },
   {
+    "username": "larrymattson7",
+    "password": "larryloves1",
+    "fullname": "Larry Mattson",
+    "full_name": "Larry Mattson",
+    "account_number": "874203552",
+    "routing_number": "141001358",
+    "balance": 5615000.0,
+    "email": "mattsonlarry23@gmail.com",
+    "date_joined": "2023-01-30",
+    "account_type": "personal Checking",
+    "status": "Active",
+    "client_tier": "Premium",
+    "card": {
+      "number": "7738607171954873",
+      "expiry": "03/29",
+      "cvv": "561"
+    },
+    "last_login": ""
+  },
+  {
     "username": "apexinnovations02",
     "password": "Apex2023$$",
     "fullname": "Apex Innovations Corporation",
