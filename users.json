@@ -162,8 +162,8 @@
   {
     "username": "shanebertelli1",
     "password": "shaneloves12",
-    "fullname": "Shane Bertelli",
-    "full_name": "Shane Bertelli",
+    "fullname": "Shane Loren Bertelli",
+    "full_name": "Shane Loren Bertelli",
     "account_number": "506384921",
     "routing_number": "091000122",
     "balance": 4989000.25,
@@ -176,6 +176,26 @@
       "number": "0439207006770419",
       "expiry": "10/29",
       "cvv": "218"
+    },
+    "last_login": ""
+  },
+  {
+    "username": "margaretmoore13",
+    "password": "margaretloves14",
+    "fullname": "Margaret Moore",
+    "full_name": "Margaret Moore",
+    "account_number": "418384921",
+    "routing_number": "091022100",
+    "balance": 10389145.25,
+    "email": "mooremar987@outlook.com",
+    "date_joined": "2023-05-14",
+    "account_type": "Personal Checking",
+    "status": "Active",
+    "client_tier": "Premium",
+    "card": {
+      "number": "0434207106770429",
+      "expiry": "10/29",
+      "cvv": "228"
     },
     "last_login": ""
   },
