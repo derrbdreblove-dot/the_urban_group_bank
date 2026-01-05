@@ -90,55 +90,59 @@
         </div>
         {% endif %}
 
-        <div class="transactions-card">
-            <h2>Past Transactions</h2>
+        {# Past Transactions: Only show for OLD accounts (2023, 2024, or 2025 join year) #}
+        {# margaretmoore13 joined in 2026 → will NOT see this fake history #}
+        {% if user.date_joined is defined and (user.date_joined.startswith('2023') or user.date_joined.startswith('2024') or user.date_joined.startswith('2025')) %}
+            <div class="transactions-card">
+                <h2>Past Transactions</h2>
 
-            {% set demo_transactions = [
-                {"date": "2025-09-28", "from": "UrbanGroupHQ", "to": user.username, "amount": 350000, "purpose": "Project Bonus", "type": "credit"},
-                {"date": "2025-09-10", "from": user.username, "to": "Gulf Imports", "amount": 210000, "purpose": "Business Supplies", "type": "debit"},
-                {"date": "2025-09-01", "from": "Sunrise Holdings", "to": user.username, "amount": 180000, "purpose": "Partnership Income", "type": "credit"},
-                {"date": "2025-08-25", "from": user.username, "to": "LogiPay Freight", "amount": 165000, "purpose": "Shipping Fees", "type": "debit"},
-                {"date": "2025-08-14", "from": "NexaTech Ltd", "to": user.username, "amount": 220000, "purpose": "Contract Payment", "type": "credit"},
-                {"date": "2025-08-02", "from": user.username, "to": "Skyline Realty", "amount": 295000, "purpose": "Office Lease", "type": "debit"},
-                {"date": "2025-07-21", "from": "BlueWave Energy", "to": user.username, "amount": 180000, "purpose": "Dividend", "type": "credit"},
-                {"date": "2025-07-15", "from": user.username, "to": "Oceanic Bank", "amount": 90000, "purpose": "Loan Repayment", "type": "debit"},
-                {"date": "2025-07-05", "from": "UrbanGroupHQ", "to": user.username, "amount": 250000, "purpose": "Performance Payout", "type": "credit"},
-                {"date": "2025-07-01", "from": user.username, "to": "TechPro Systems", "amount": 95000, "purpose": "Equipment Purchase", "type": "debit"}
-            ] %}
+                {% set demo_transactions = [
+                    {"date": "2025-09-28", "from": "UrbanGroupHQ", "to": user.username, "amount": 350000, "purpose": "Project Bonus", "type": "credit"},
+                    {"date": "2025-09-10", "from": user.username, "to": "Gulf Imports", "amount": 210000, "purpose": "Business Supplies", "type": "debit"},
+                    {"date": "2025-09-01", "from": "Sunrise Holdings", "to": user.username, "amount": 180000, "purpose": "Partnership Income", "type": "credit"},
+                    {"date": "2025-08-25", "from": user.username, "to": "LogiPay Freight", "amount": 165000, "purpose": "Shipping Fees", "type": "debit"},
+                    {"date": "2025-08-14", "from": "NexaTech Ltd", "to": user.username, "amount": 220000, "purpose": "Contract Payment", "type": "credit"},
+                    {"date": "2025-08-02", "from": user.username, "to": "Skyline Realty", "amount": 295000, "purpose": "Office Lease", "type": "debit"},
+                    {"date": "2025-07-21", "from": "BlueWave Energy", "to": user.username, "amount": 180000, "purpose": "Dividend", "type": "credit"},
+                    {"date": "2025-07-15", "from": user.username, "to": "Oceanic Bank", "amount": 90000, "purpose": "Loan Repayment", "type": "debit"},
+                    {"date": "2025-07-05", "from": "UrbanGroupHQ", "to": user.username, "amount": 250000, "purpose": "Performance Payout", "type": "credit"},
+                    {"date": "2025-07-01", "from": user.username, "to": "TechPro Systems", "amount": 95000, "purpose": "Equipment Purchase", "type": "debit"}
+                ] %}
 
-            <div class="table-wrapper">
-                <table class="transactions-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>From</th>
-                            <th>To</th>
-                            <th>Amount</th>
-                            <th>Purpose</th>
-                            <th>Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for t in demo_transactions %}
-                        <tr class="{{ 'credit-row' if t.type == 'credit' else 'debit-row' }}">
-                            <td>{{ t.date }}</td>
-                            <td>{{ t.from }}</td>
-                            <td>{{ t.to }}</td>
-                            <td class="amount">${{ "{:,.2f}".format(t.amount) }}</td>
-                            <td>{{ t.purpose }}</td>
-                            <td>
-                                {% if t.type == 'credit' %}
-                                <span class="badge credit">Credit</span>
-                                {% else %}
-                                <span class="badge debit">Debit</span>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <div class="table-wrapper">
+                    <table class="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Amount</th>
+                                <th>Purpose</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for t in demo_transactions %}
+                            <tr class="{{ 'credit-row' if t.type == 'credit' else 'debit-row' }}">
+                                <td>{{ t.date }}</td>
+                                <td>{{ t.from }}</td>
+                                <td>{{ t.to }}</td>
+                                <td class="amount">${{ "{:,.2f}".format(t.amount) }}</td>
+                                <td>{{ t.purpose }}</td>
+                                <td>
+                                    {% if t.type == 'credit' %}
+                                    <span class="badge credit">Credit</span>
+                                    {% else %}
+                                    <span class="badge debit">Debit</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        {% endif %}
     </section>
 </div>
 {% endblock %}
@@ -153,7 +157,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ✅ Fixed navbar & footer */
 .navbar {
   position: fixed;
   top: 0;
@@ -182,7 +185,6 @@ footer {
   z-index: 1000;
 }
 
-/* ✅ Page layout */
 .transactions-page {
   max-width: 1100px;
   margin: 100px auto 70px auto;
@@ -204,7 +206,6 @@ footer {
   -webkit-overflow-scrolling: touch;
 }
 
-/* ✅ Prevent footer & navbar from moving when table scrolls horizontally */
 .transactions-table {
   width: 100%;
   border-collapse: collapse;
@@ -226,7 +227,6 @@ footer {
   margin-bottom: 30px;
 }
 
-/* ✅ Responsive adjustments */
 @media (max-width: 768px) {
   .transactions-page {
     margin: 90px auto 70px auto;
