@@ -149,26 +149,15 @@ def dashboard():
     txs = sanitize_transactions(load_json(TRANSACTIONS_FILE))
     age_days = account_age_days(user)
 
-    # 🔒 New account rule
-    if age_days < 14:
-        user_tx = []
-
-        users = load_json(USERS_FILE)
-        for u in users:
-            if u["username"] == user["username"]:
-                if float(u.get("balance", 0)) > 300:
-                    u["balance"] = round(random.uniform(200, 300), 2)
-                    user["balance"] = u["balance"]
-        save_json(USERS_FILE, users)
-
-    else:
-        join_year = user.get("date_joined", "1900")[:4]
-        user_tx = [
-            t for t in txs
-            if (t["from"] == user["username"] or t["to"] == user["username"])
-            and t["timestamp"][:4] >= join_year
-        ]
-        user_tx.sort(key=lambda x: x["timestamp"], reverse=True)
+    # === FIXED: Removed new account restrictions ===
+    # Show full data always, no balance cap or hidden transactions
+    join_year = user.get("date_joined", "1900")[:4]
+    user_tx = [
+        t for t in txs
+        if (t["from"] == user["username"] or t["to"] == user["username"])
+        and t["timestamp"][:4] >= join_year
+    ]
+    user_tx.sort(key=lambda x: x["timestamp"], reverse=True)
 
     balance_formatted = "${:,.2f}".format(float(user.get("balance", 0)))
 
@@ -237,16 +226,15 @@ def transactions():
     txs = sanitize_transactions(load_json(TRANSACTIONS_FILE))
     age_days = account_age_days(user)
 
-    if age_days < 14:
-        user_tx = []
-    else:
-        join_year = user.get("date_joined", "1900")[:4]
-        user_tx = [
-            t for t in txs
-            if (t["from"] == user["username"] or t["to"] == user["username"])
-            and t["timestamp"][:4] >= join_year
-        ]
-        user_tx.sort(key=lambda x: x["timestamp"], reverse=True)
+    # === FIXED: Removed new account restrictions ===
+    # Show full data always, no hidden transactions
+    join_year = user.get("date_joined", "1900")[:4]
+    user_tx = [
+        t for t in txs
+        if (t["from"] == user["username"] or t["to"] == user["username"])
+        and t["timestamp"][:4] >= join_year
+    ]
+    user_tx.sort(key=lambda x: x["timestamp"], reverse=True)
 
     return render_template("transactions.html", user=user, transactions=user_tx)
 
