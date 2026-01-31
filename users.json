@@ -41,7 +41,7 @@
   },
   {
     "username": "zenithcapital02",
-    "password": "ZenCap#2023",
+    "password": "scrypt:32768:8:1$KaA7KvHDlSemvHrV$19f89768f7162f6cc3c48befbf6d8a926bcaae0cb50f6190348b18ddd7689fb8678c9030010740191db479a08b7b86615b8597877d85fc0cd29b5f81951bbeea",
     "fullname": "Zenith Capital Partners",
     "full_name": "Zenith Capital Partners",
     "account_number": "849302717",
@@ -186,7 +186,7 @@
     "full_name": "Margaret Moore",
     "account_number": "418384921",
     "routing_number": "091022100",
-    "balance": 226.02,
+    "balance": 5103226.02,
     "email": "mooremar987@outlook.com",
     "date_joined": "2026-01-07",
     "account_type": "Personal Checking",
