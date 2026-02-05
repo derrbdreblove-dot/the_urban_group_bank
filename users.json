@@ -218,5 +218,25 @@
       "cvv": "206"
     },
     "last_login": ""
+  },
+  {
+    "username": "diamondrolex29",
+    "password": "Diamond11",
+    "fullname": "Diamond Bertelli",
+    "full_name": "Diamond Bertelli",
+    "account_number": "736670194",
+    "routing_number": "020000219",
+    "balance": 5302000.0,
+    "email": "diamondrolex29@gmail.com",
+    "date_joined": "2023-08-21",
+    "account_type": "Business Checking",
+    "status": "Active",
+    "client_tier": "Standard",
+    "card": {
+      "number": "5586610140595901",
+      "expiry": "07/28",
+      "cvv": "476"
+    },
+    "last_login": ""
   }
 ]
